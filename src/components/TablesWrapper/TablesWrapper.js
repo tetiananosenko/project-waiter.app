@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 
 function TablesWrapper() {
   const dispatch = useDispatch();
-  
+
   const [isLoading, setIsLoading] = useState(false);
 
   const fetchTables = () => {
@@ -29,6 +29,7 @@ function TablesWrapper() {
     <Routes>
       <Route path="/" element={<AllTables isLoading={isLoading} />} />
       <Route path="/table/:id" element={<Table />} />
+      <Route path="*" element={<AllTables />} />
     </Routes>
   );
 }

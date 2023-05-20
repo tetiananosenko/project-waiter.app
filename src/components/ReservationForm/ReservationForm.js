@@ -103,27 +103,34 @@ const Select = (props) => {
   return (
     <form onSubmit={handleSubmit}>
       <div className={styles.wrapper}>
-
-        <label className={styles.status}>
-          Status:
-          <select value={status} onChange={handleSelect}>
+        <div className={styles.WrapperForm}>
+          <label className={styles.status} htmlFor='status-select'>
+            Status:
+          </label>
+          <select value={status} onChange={handleSelect} id='status-select'>
             {options?.map((option) => (
               <option value={option.label}>{option.label}</option>
             ))}
           </select>
-        </label>
-        <label className={styles.people}>
-          People:
+        </div>
+        <div className={styles.WrapperForm}>
+          <label className={styles.people} htmlFor='status-people'>
+            People:
+          </label>
           <input className={styles.input} type='number' value={peopleAmount} onChange={event => handleChange(event, 1, 10, 'amount')} min='0' max='10' />
-          <span>/</span>
+          <span className={styles.span}>/</span>
           <input type='number' value={maxPeopleAmount} onChange={event => handleChange(event, 1, 10, 'maxAmount')} />
-        </label>
-        <label className={clsx(styles.showBill, status !== 'Busy' && styles.bill)}>
-          Bill:
-          <input type='number' value={bill} onChange={event => handleChange(event, 1, 10000, 'bill')} />
-        </label>
+
+        </div>
+        <div className={clsx(styles.bill, status === 'Busy' && styles.WrapperForm)}>
+          <label className={clsx(styles.showBill)} htmlFor='status-bill'>
+            Bill:
+          </label>
+          <input type='number' value={bill} onChange={event => handleChange(event, 1, 10000, 'bill')} id='status-bill' />
+
+        </div>
       </div>
-      <Button type='submit'>Update</Button>
+      <Button className={styles.btnUpdate} type='submit'>Update</Button>
     </form>
   );
 };

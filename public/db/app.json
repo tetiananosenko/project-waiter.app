@@ -2,7 +2,7 @@
   "tables": [
     {
       "id": "1",
-      "status": "Reserved",
+      "status": "Busy",
       "peopleAmount": 0,
       "maxPeopleAmount": 7,
       "bill": 0

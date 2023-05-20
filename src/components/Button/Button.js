@@ -1,7 +1,8 @@
 import styles from './Button.module.css';
+import clsx from 'clsx';
 
 const Button = props => {
-  return <button className={styles.button} >{props.children}</button>
+  return <button className={clsx(styles.button, props.className)} >{props.children}</button>
 }
 
 

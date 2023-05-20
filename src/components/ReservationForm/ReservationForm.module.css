@@ -3,14 +3,29 @@
   flex-direction: column;
 }
 
-.status, .people, .showBill{
+.status,
+.people,
+.showBill {
   font-size: 32px;
   font-weight: bold;
-  /* margin-right: 20px; */
-}
+  flex-basis: 20%;
 
+}
 
 .bill {
   display: none;
 }
 
+.WrapperForm {
+  display: flex;
+  flex-direction: row;
+  margin-top: 30px;
+}
+
+.btnUpdate {
+  margin-top: 30px;
+}
+
+.span {
+  font-size: 30px;
+}

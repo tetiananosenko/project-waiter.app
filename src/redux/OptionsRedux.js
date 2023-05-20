@@ -1,9 +1,6 @@
-
 export const addOptions = payload => ({ type: ADD_OPTIONS, payload });
 
-
 const ADD_OPTIONS = 'api/options/ADD_OPTIONS ';
-
 
 const optionsRedux = (statePart = [], action) => {
   switch (action.type) {
