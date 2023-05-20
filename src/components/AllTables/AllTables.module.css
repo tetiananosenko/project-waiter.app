@@ -1,0 +1,39 @@
+.tables {
+  text-align: center;
+  padding-top: 30px;
+}
+
+.table {
+  margin-top: 40px;
+  padding-bottom: 40px;
+}
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: thick double #ACB1D6;
+  ;
+}
+
+.status {
+  font-size: 22px;
+  font-weight: bold;
+  margin: 0 10px 0 30px;
+}
+
+.textStatus {
+  font-style:  italic;
+  font-size: 20px;
+}
+
+h1,
+p {
+  margin: 0;
+}
+
+.div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}

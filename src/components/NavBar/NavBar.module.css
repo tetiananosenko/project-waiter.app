@@ -1,0 +1,29 @@
+.navWrapper {
+  background-color: #ACB1D6;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 70px;
+  border-radius: 10px;
+}
+
+.navLink {
+  font-size: 24px;
+  margin-right: 20px;
+  text-decoration: none;
+  color: white;
+  
+}
+
+.logo {
+  color: white;
+  font-size: 30px;
+  padding-left: 20px;
+}
+
+.navLink:hover {
+  border: 1px solid white;
+  border-radius: 10px;
+  padding: 10px;
+  transition: all 1s ease-in-out;
+}

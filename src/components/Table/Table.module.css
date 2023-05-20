@@ -1,0 +1,12 @@
+.tableWrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 32px;
+  justify-content: center;
+}
+
+.icon {
+  color: #ACB1D6;
+  padding-right: 20px;
+}
