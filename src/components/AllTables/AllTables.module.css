@@ -23,7 +23,7 @@
 }
 
 .textStatus {
-  font-style:  italic;
+  font-style: italic;
   font-size: 20px;
 }
 
@@ -36,4 +36,10 @@ p {
   display: flex;
   flex-direction: row;
   align-items: center;
+}
+
+.loading {
+  height: calc(100vh - 234px);
+  display: flex;
+  justify-content: center;
 }
