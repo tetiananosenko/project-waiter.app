@@ -1,13 +1,6 @@
 const initialState = {
-  tables: [
-  
-  ],
-  options: [
-    { label: 'Reserved', },
-    { label: 'Free', },
-    { label: 'Busy',  },
-    { label: 'Cleaning', },
-  ]
+  tables: [],
+  options: []
 };
 
 export default initialState;
