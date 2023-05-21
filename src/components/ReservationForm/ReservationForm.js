@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import { addActions } from "../../redux/ActionsRedux";
 import { useEffect } from 'react';
 import { addOptions } from '../../redux/OptionsRedux';
+import { API_URLOPTIONS } from "../../config";
 
 const Select = (props) => {
   const { id } = props
@@ -21,7 +22,7 @@ const Select = (props) => {
   const [bill, setBill] = useState(props.bill);
 
   const fetchOptions = () => {
-    return fetch('http://localhost:3131/api/options')
+    return fetch(API_URLOPTIONS)
       .then(res => res.json())
       .catch(error => console.log(error))
   }

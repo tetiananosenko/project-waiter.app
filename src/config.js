@@ -1,0 +1,2 @@
+export const API_URL = process.env.NODE_ENV === 'production' ? '/api' : 'http://localhost:3131/api/tables';
+export const API_URLOPTIONS = process.env.NODE_ENV === 'production' ? '/api' : 'http://localhost:3131/api/options';

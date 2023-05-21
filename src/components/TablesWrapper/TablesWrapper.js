@@ -4,7 +4,7 @@ import Table from "../Table/Table";
 import { useEffect, useState } from 'react';
 import { addTables } from '../../redux/ActionsRedux';
 import { useDispatch } from 'react-redux';
-
+import { API_URL } from '../../config';
 function TablesWrapper() {
   const dispatch = useDispatch();
 
@@ -12,7 +12,7 @@ function TablesWrapper() {
 
   const fetchTables = () => {
     setIsLoading(true);
-    return fetch('http://localhost:3131/api/tables')
+    return fetch(API_URL)
       .then(res => res.json())
       .catch(error => console.log(error))
   }
