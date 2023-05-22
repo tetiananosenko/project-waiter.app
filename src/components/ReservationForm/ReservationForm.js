@@ -5,10 +5,9 @@ import clsx from 'clsx';
 import styles from './ReservationForm.module.css';
 import Button from "../Button/Button";
 import { useNavigate } from 'react-router-dom';
-import { updateTable } from "../../redux/TablesRedux";
+import { putData } from "../../redux/TablesRedux";
 import { useEffect } from 'react';
-import { addOptions } from '../../redux/OptionsRedux';
-import { API_URLOPTIONS } from "../../config";
+import { fetchOptions } from "../../redux/OptionsRedux";
 
 const ReservationForm = (props) => {
   const { id } = props
@@ -21,34 +20,10 @@ const ReservationForm = (props) => {
   const [maxPeopleAmount, setMaxPeopleAmount] = useState(props.maxPeopleAmount);
   const [bill, setBill] = useState(props.bill);
 
-  const fetchOptions = () => {
-    return fetch(API_URLOPTIONS)
-      .then(res => res.json())
-      .catch(error => console.log(error))
-  }
 
   useEffect(() => {
-    fetchOptions()
-      .then(options => {
-        dispatch(addOptions(options))
-      })
-      .catch(err => console.error(err));
+    dispatch(fetchOptions());
   }, [dispatch]);
-
-
-  function putData(url = "", data = {}) {
-    return fetch(url, {
-      method: "PUT",
-      headers: {
-        'Content-type': 'application/json; charset=UTF-8',
-      },
-      body: JSON.stringify(
-        data
-      ),
-    })
-      .then(res => res.json())
-      .catch(err => console.log(err))
-  }
 
   const handleSelect = (event) => {
     let value = event.target.value;
@@ -71,24 +46,20 @@ const ReservationForm = (props) => {
     return value
   }
 
-  const handleSubmit = e => {
+  const handleSubmit = async (e) => {
+
     e.preventDefault();
-    putData(`http://localhost:3131/api/tables/${id}`, {
+    await dispatch(putData({
       id,
       status: status,
       peopleAmount: Number(peopleAmount),
       maxPeopleAmount: Number(maxPeopleAmount),
       bill: Number(bill)
-    })
-      .then(() => {
-        dispatch(updateTable({ status: status, id, bill, peopleAmount, maxPeopleAmount }))
-        navigate('/');
-      })
-      .catch((error) => {
-        console.log(error)
-      })
-  };
+    }))
 
+    navigate('/');
+
+  };
 
   return (
     <form onSubmit={handleSubmit}>

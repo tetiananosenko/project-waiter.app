@@ -1,9 +1,9 @@
 import { API_URL } from '../config';
 
-export const updateTable = payload => ({ type: ADD_ACTIONS, payload });
+export const updateTable = payload => ({ type: UPDATE_TABLE, payload });
 export const addTables = payload => ({ type: ADD_TABLES, payload })
 
-const ADD_ACTIONS = 'api/tables/ADD_ACTIONS ';
+const UPDATE_TABLE = 'api/tables/UPDATE_TABLE ';
 const ADD_TABLES = 'api/tables/ADD_TABLES';
 
 
@@ -20,10 +20,29 @@ export function fetchTables(setIsLoading) {
   }
 }
 
+export function putData(data = {}) {
+  return async (dispatch) => {
+    try {
+      const response = await fetch(`http://localhost:3131/api/tables/${data?.id}`, {
+        method: "PUT",
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+        },
+        body: JSON.stringify(
+          data
+        ),
+      })
+      const responseData = await response.json()
+      dispatch(updateTable({ ...responseData }))
+    } catch (error) {
+      console.error(error)
+    }
+  }
+}
 
 const actionsReducer = (statePart = [], action) => {
   switch (action.type) {
-    case ADD_ACTIONS:
+    case UPDATE_TABLE:
       return [
         ...statePart?.map((table) => {
           if (table.id === action.payload.id) {
