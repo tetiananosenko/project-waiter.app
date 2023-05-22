@@ -1,9 +1,25 @@
+import { API_URL } from '../config';
 
-export const addActions = payload => ({ type: ADD_ACTIONS, payload });
+export const updateTable = payload => ({ type: ADD_ACTIONS, payload });
 export const addTables = payload => ({ type: ADD_TABLES, payload })
 
 const ADD_ACTIONS = 'api/tables/ADD_ACTIONS ';
 const ADD_TABLES = 'api/tables/ADD_TABLES';
+
+
+export function fetchTables(setIsLoading) {
+  return async (dispatch) => {
+    try {
+      const response = await fetch(API_URL)
+      const tables = await response.json()
+      setIsLoading(false);
+      dispatch(addTables(tables))
+    } catch (error) {
+      console.error(error)
+    }
+  }
+}
+
 
 const actionsReducer = (statePart = [], action) => {
   switch (action.type) {

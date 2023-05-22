@@ -5,12 +5,12 @@ import clsx from 'clsx';
 import styles from './ReservationForm.module.css';
 import Button from "../Button/Button";
 import { useNavigate } from 'react-router-dom';
-import { addActions } from "../../redux/ActionsRedux";
+import { updateTable } from "../../redux/TablesRedux";
 import { useEffect } from 'react';
 import { addOptions } from '../../redux/OptionsRedux';
 import { API_URLOPTIONS } from "../../config";
 
-const Select = (props) => {
+const ReservationForm = (props) => {
   const { id } = props
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -61,33 +61,18 @@ const Select = (props) => {
     }
   }
 
-  const handleChange = (event, min, max, id) => {
+  const valideMinMaxNumber = (value, min, max) => {
 
-    let valueAmount = event.target.value;
-    if (+valueAmount < min) {
-      valueAmount = min
-    } else if (+valueAmount > max) {
-      valueAmount = max
+    if (value < min) {
+      return min
+    } else if (value > max) {
+      return max
     }
-
-    if (id === 'amount' && valueAmount > maxPeopleAmount) {
-      setPeopleAmount(maxPeopleAmount);
-      return
-    }
-
-    if (id === 'amount') {
-      setPeopleAmount(valueAmount);
-    } else if (id === 'maxAmount') {
-      setMaxPeopleAmount(valueAmount);
-    } else if (id === 'bill') {
-      setBill(valueAmount)
-    }
-
-  };
+    return value
+  }
 
   const handleSubmit = e => {
     e.preventDefault();
-    dispatch(addActions({ status: status, id, bill, peopleAmount, maxPeopleAmount }))
     putData(`http://localhost:3131/api/tables/${id}`, {
       id,
       status: status,
@@ -96,8 +81,12 @@ const Select = (props) => {
       bill: Number(bill)
     })
       .then(() => {
+        dispatch(updateTable({ status: status, id, bill, peopleAmount, maxPeopleAmount }))
         navigate('/');
-      });
+      })
+      .catch((error) => {
+        console.log(error)
+      })
   };
 
 
@@ -110,7 +99,7 @@ const Select = (props) => {
           </label>
           <select value={status} onChange={handleSelect} id='status-select'>
             {options?.map((option) => (
-              <option value={option.label}>{option.label}</option>
+              <option key={option.label} value={option.label}>{option.label}</option>
             ))}
           </select>
         </div>
@@ -118,24 +107,26 @@ const Select = (props) => {
           <label className={styles.people} htmlFor='status-people'>
             People:
           </label>
-          <input className={styles.input} type='number' value={peopleAmount} onChange={event => handleChange(event, 1, 10, 'amount')} min='0' max='10' />
+          <input className={styles.input} type='number' value={peopleAmount} onChange={event => setPeopleAmount(valideMinMaxNumber(Number(event.target.value), 1, maxPeopleAmount))} min='0' max='10' />
           <span className={styles.span}>/</span>
-          <input type='number' value={maxPeopleAmount} onChange={event => handleChange(event, 1, 10, 'maxAmount')} />
+          <input type='number' value={maxPeopleAmount} onChange={event => setMaxPeopleAmount(valideMinMaxNumber(Number(event.target.value), 1, 10))} />
 
         </div>
-        <div className={clsx(styles.bill, status === 'Busy' && styles.WrapperForm)}>
-          <label className={clsx(styles.showBill)} htmlFor='status-bill'>
-            Bill:
-          </label>
-          <input type='number' value={bill} onChange={event => handleChange(event, 1, 10000, 'bill')} id='status-bill' />
+        {status === 'Busy' && (
+          <div className={styles.WrapperForm}>
+            <label className={clsx(styles.showBill)} htmlFor='status-bill'>
+              Bill:
+            </label>
+            <input type='number' value={bill} onChange={event => setBill(valideMinMaxNumber(Number(event.target.value), 1, 10000))} id='status-bill' />
+          </div>
+        )}
 
-        </div>
       </div>
       <Button className={styles.btnUpdate} type='submit'>Update</Button>
     </form>
   );
 };
 
-export default Select;
+export default ReservationForm;
 
 
