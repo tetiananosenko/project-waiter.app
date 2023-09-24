@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/project-waiter.app/static/css/main.01edeced.css",
+    "main.js": "/project-waiter.app/static/js/main.295061c8.js",
+    "index.html": "/project-waiter.app/index.html",
+    "main.01edeced.css.map": "/project-waiter.app/static/css/main.01edeced.css.map",
+    "main.295061c8.js.map": "/project-waiter.app/static/js/main.295061c8.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.01edeced.css",
+    "static/js/main.295061c8.js"
+  ]
+}
